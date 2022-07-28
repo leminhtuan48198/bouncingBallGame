@@ -9,27 +9,29 @@ let interval1;
 let interval2;
 let interval3;
 let interval4;
+let vx=Math.random()*7
+let vy=Math.random()*7
 function move1() {
-    q1 -= 5;
-    w1-=5
+    q1 -= 5+vx;
+    w1-=5+vy
 }function move2() {
-    q1 += 5;
-    w1-=5
+    q1 += 5+vx;
+    w1-=5+vy
 }function move3() {
-    q1 += 5;
-    w1+=5
+    q1 += 5+vx;
+    w1+=5+vy
 }function move4() {
-    q1 -= 5;
-    w1+=5
+    q1 -= 5+vx;
+    w1+=5+vy
 }
 
 function draw1() {
     ctx.clearRect(0, 0, 500, 560)
     move1()
-    if (q1 == 5) {
+    if (q1 <= 5) {
         stop1();
         run2();}
-        if (w1 == 5) {
+        if (w1 <= 5) {
         stop1();
         run4();
     }
@@ -40,11 +42,11 @@ function draw1() {
 function draw2() {
     ctx.clearRect(0, 0, 500, 560)
     move2()
-    if (w1 == 5) {
+    if (w1 <= 5) {
         stop2();
         run3();
     }
-    if (q1 == 495) {
+    if (q1 >= 495) {
         stop2();
         run1();
     }
@@ -54,18 +56,22 @@ function draw2() {
 function draw3() {
     ctx.clearRect(0, 0, 500, 560)
     move3()
-    if (q1 == 495) {
+    if (q1 >= 495) {
         stop3();
         run4();
     }
     if (isCollision(ball,bar)) {
         stop3();
         run2();
+        vx=Math.random()*7
+
+
     }
     //cham bien duoi
-    if (w1 == 555) {
+    if (w1 >= 555) {
         stop3();
-        alert("die")
+        stop();
+        alert("Trò chơi kết thúc. Điểm của bạn là "+num)
     }
     ball.drawCircle(q1, w1, "red")
     bar.drawRectangle(q2,w2,"blue")
@@ -73,18 +79,20 @@ function draw3() {
 function draw4() {
     ctx.clearRect(0, 0, 500, 560)
     move4()
-    if (q1 == 5) {
+    if (q1 <= 5) {
         stop4();
         run3();
     }
     if (isCollision(ball,bar)) {
         stop4();
         run1();
+        vx=Math.random()*7
     }
     // cham bien duoi
-    if (w1 == 555) {
+    if (w1 >= 555) {
         stop4();
-        alert("die");
+        stop()
+        alert("Trò chơi kết thúc. Điểm của bạn là "+num);
     }
     ball.drawCircle(q1, w1, "red")
     bar.drawRectangle(q2,w2,"blue")
@@ -116,10 +124,12 @@ function stop4() {
     clearInterval(interval4)
 }
 function leftArrowPressed() {
-    q2-=5
+    if(q2>0){
+    q2-=5;}
 }
 function rightArrowPressed() {
-    q2+=5
+    if(q2<400){
+    q2+=5}
 }
 function moveSelection(evt) {
     switch (evt.keyCode) {
