@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="cauHinh.css">
+
+
 
 </head>
-<body onload="docReady();run1();start()">
+<body onload="docReady();run1();start();run5()">
 <table>
     <tr>
         <td rowspan="20"><canvas width="500px" height="560px" id="canvas" style="border: 1px solid" ></canvas></td>
@@ -17,23 +18,33 @@
         <td colspan="2" style="height: 20px"><a href="demo.html"><button>reset</button></a></td>
     </tr>
     <tr>
-        <td colspan="2" style="height: 30px; color: blue"><b>Bối cảnh</b></td>
+        <td colspan="2" style="height: 30px; color: blue"><b>Luật chơi</b></td>
     </tr>
     <tr>
-        <td rowspan="17" colspan="3" style="width: 200px;height: 200px; color: blue"> Thần Anubis là vị thần canh giữ các linh hồn của người đã chết.
-        Một chiếc bình cổ Hy Lạp được thần sử dụng để nhốt các linh hồn trong đó.
-        Một hôm Thần phải lên đỉnh Olympus để họp mặt với các vị thần khác.
-        Bạn là một Á Thần, hãy giúp Thần Anubis giữ các linh hồn không thoát ra khỏi bình.
-        Luôn nhớ đeo găng tay của Thần để đẩy các linh hồn bật lại vì bàn tay trần tục của bạn không thể chạm vào các linh hồn.
-        Một chú ý nữa là khi linh hồn bị ép vào 2 bức tường, nó sẽ nổi điên, khi thoát khỏi chiếc bình, nó sẽ ám ngược lại bạn.
-        Chỉ có cách duy nhất là thoát chương trình để thoát khỏi tình trạng đó</td>
+        <td rowspan="17" colspan="3" style="width: 200px;height: 200px; color: blue"> Di chuyển
+        thanh ngang màu xanh bằng 2 phím "sang trái", "sang phải" để đỡ quả bóng màu đỏ. Mỗi lần
+        quả bóng phá được một viên gạch màu xanh, bạn sẽ được thêm 100 điểm. Hãy phá gạch càng
+        nhanh càng tốt vì cứ 5 giây, điểm của bạn sẽ bị trừ đi một.Đồng thời cứ 10 giây, gạch lại tiến
+            gần hơn về phía bạn. Trò chơi kết thúc khi bạn không
+            đỡ được quả bóng hoặc khi bạn phá được hết gạch trên bản đồ hoặc khi gạch chạm vào bạn. </td>
+    <td></td>
+        <td></td>
+        <td id="hightscore"></td>
     </tr>
 </table>
 
 
-<script src="score.js"></script>
-<script src="circle.js"></script>
-<script src="rectangle.js"></script>
-<script src="main.js"></script>
+<script src="js/bricks.js"></script>
+<script src="js/score.js"></script>
+<script src="js/circle.js"></script>
+<script src="js/rectangle.js"></script>
+<script>
+    function saveScore(){
+    localStorage.setItem(username,username+num)
+    document.getElementById("hightscore").innerHTML=localStorage.getItem(username)
+    }
+</script>
+<script src="js/main.js"></script>
+
 </body>
 </html>

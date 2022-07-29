@@ -4,6 +4,8 @@ let bar=new Rectangle(100,5)
 let q1 = 250
 let w1 = 300
 let q2=250
+let username
+let count=0
 let w2=500
 let interval1;
 let interval2;
@@ -14,15 +16,20 @@ let vy=Math.random()*7
 function move1() {
     q1 -= 5+vx;
     w1-=5+vy
-}function move2() {
+    if(count===20){stopAll(); username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+}}
+    function move2() {
     q1 += 5+vx;
     w1-=5+vy
+    if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")}
 }function move3() {
     q1 += 5+vx;
     w1+=5+vy
+    if(count===20){stopAll;username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")}
 }function move4() {
     q1 -= 5+vx;
     w1+=5+vy
+    if(count===20){stopAll;username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")}
 }
 
 function draw1() {
@@ -35,9 +42,19 @@ function draw1() {
         stop1();
         run4();
     }
+for(let e of brick){
+    if (e.isCollision1(ball)){
+        if(e.state){num+=100;count++; stop1();
+            run4();}
+        e.setState();
 
+    }
+}
     ball.drawCircle(q1, w1, "red")
     bar.drawRectangle(q2,w2,"blue")
+    for (let e of brick){
+          if(e.state)  {e.drawBricks()}
+    }
 }
 function draw2() {
     ctx.clearRect(0, 0, 500, 560)
@@ -50,8 +67,20 @@ function draw2() {
         stop2();
         run1();
     }
+    for(let e of brick){
+        if (e.isCollision1(ball)){
+            if(e.state){count++;num+=100; stop2();
+                run3();}
+            e.setState();
+
+        }
+    }
     ball.drawCircle(q1, w1, "red")
     bar.drawRectangle(q2,w2,"blue")
+    for (let e of brick){
+        if(e.state)  {e.drawBricks()}
+    }
+
 }
 function draw3() {
     ctx.clearRect(0, 0, 500, 560)
@@ -59,6 +88,14 @@ function draw3() {
     if (q1 >= 495) {
         stop3();
         run4();
+    }
+    for(let e of brick){
+        if (e.isCollision1(ball)){
+            if(e.state){ count++;num+=100; stop3();
+                run2();}
+            e.setState();
+
+        }
     }
     if (isCollision(ball,bar)) {
         stop3();
@@ -69,12 +106,15 @@ function draw3() {
     }
     //cham bien duoi
     if (w1 >= 555) {
-        stop3();
-        stop();
-        alert("Trò chơi kết thúc. Điểm của bạn là "+num)
+        stopAll();
+        uesername=prompt("Trò chơi kết thúc. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        saveScore();
     }
     ball.drawCircle(q1, w1, "red")
     bar.drawRectangle(q2,w2,"blue")
+    for (let e of brick){
+        if(e.state)  {e.drawBricks()}
+    }
 }
 function draw4() {
     ctx.clearRect(0, 0, 500, 560)
@@ -83,6 +123,14 @@ function draw4() {
         stop4();
         run3();
     }
+    for(let e of brick){
+        if (e.isCollision1(ball)){
+            if(e.state){count++;num+=100; stop4();
+                run1();}
+            e.setState();
+
+        }
+    }
     if (isCollision(ball,bar)) {
         stop4();
         run1();
@@ -90,12 +138,15 @@ function draw4() {
     }
     // cham bien duoi
     if (w1 >= 555) {
-        stop4();
-        stop()
-        alert("Trò chơi kết thúc. Điểm của bạn là "+num);
+        stopAll()
+        uesername=prompt("Trò chơi kết thúc. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        saveScore()
     }
     ball.drawCircle(q1, w1, "red")
     bar.drawRectangle(q2,w2,"blue")
+    for (let e of brick){
+        if(e.state)  {e.drawBricks()}
+    }
 }
 
 function run1() {
@@ -167,4 +218,24 @@ function isCollision(ball, bar) {
     let dy = w1 - Ay;
 
     return (dx * dx + dy * dy) <= ball.radius * ball.radius;
+}
+function birckMoveDown(){
+    for(let e of brick){
+        e.moveDown()
+        if(e.state){
+            if(e.y+e.height>=500){
+                stopAll();username=prompt("Bạn thua. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+            }
+        }
+    }
+}
+let interval5
+function run5(){
+interval5 = setInterval(birckMoveDown, 10000)
+}
+function stop5(){
+    clearInterval(interval5)
+}
+function stopAll(){
+    stop1();stop2();stop3();stop4();stop5();stop()
 }
