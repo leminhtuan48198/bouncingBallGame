@@ -17,19 +17,28 @@ function move1() {
     q1 -= 5+vx;
     w1-=5+vy
     if(count===20){stopAll(); username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        saveScore()
 }}
     function move2() {
     q1 += 5+vx;
     w1-=5+vy
-    if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")}
-}function move3() {
+    if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        saveScore()
+    }
+}
+function move3() {
     q1 += 5+vx;
     w1+=5+vy
-    if(count===20){stopAll;username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")}
-}function move4() {
+    if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        saveScore()
+    }
+}
+function move4() {
     q1 -= 5+vx;
     w1+=5+vy
-    if(count===20){stopAll;username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")}
+    if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        saveScore()
+    }
 }
 
 function draw1() {
@@ -107,7 +116,7 @@ function draw3() {
     //cham bien duoi
     if (w1 >= 555) {
         stopAll();
-        uesername=prompt("Trò chơi kết thúc. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        username=prompt("Trò chơi kết thúc. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
         saveScore();
     }
     ball.drawCircle(q1, w1, "red")
@@ -139,7 +148,7 @@ function draw4() {
     // cham bien duoi
     if (w1 >= 555) {
         stopAll()
-        uesername=prompt("Trò chơi kết thúc. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+        username=prompt("Trò chơi kết thúc. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
         saveScore()
     }
     ball.drawCircle(q1, w1, "red")
@@ -225,6 +234,7 @@ function birckMoveDown(){
         if(e.state){
             if(e.y+e.height>=500){
                 stopAll();username=prompt("Bạn thua. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
+                saveScore()
             }
         }
     }
