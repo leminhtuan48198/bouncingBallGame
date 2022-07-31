@@ -1,5 +1,5 @@
 let num = 0
-let demo
+let chayDiem
 
 function display() {
     num-=0.01
@@ -8,9 +8,9 @@ function display() {
 }
 
 function start() {
-    demo = setInterval(display, 50)
+    chayDiem = setInterval(display, 50)
 }
 
 function stop() {
-    clearInterval(demo)
+    clearInterval(chayDiem)
 }

@@ -14,28 +14,28 @@ let interval4;
 let vx=Math.random()*7
 let vy=Math.random()*7
 function move1() {
-    q1 -= 5+vx;
-    w1-=5+vy
+    q1 -= 2.5+vx/2;
+    w1-=2.5+vy/2
     if(count===20){stopAll(); username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
         saveScore()
 }}
     function move2() {
-    q1 += 5+vx;
-    w1-=5+vy
+    q1 += 2.5+vx/2;
+    w1-=2.5+vy/2
     if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
         saveScore()
     }
 }
 function move3() {
-    q1 += 5+vx;
-    w1+=5+vy
+    q1 += 2.5+vx/2;
+    w1+=2.5+vy/2
     if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
         saveScore()
     }
 }
 function move4() {
-    q1 -= 5+vx;
-    w1+=5+vy
+    q1 -= 2.5+vx/2;
+    w1+=2.5+vy/2
     if(count===20){stopAll();username=prompt("Bạn thắng. Điểm của bạn là "+num.toFixed(0)+" Nhập tên của bạn")
         saveScore()
     }
@@ -47,14 +47,14 @@ function draw1() {
     if (q1 <= 5) {
         stop1();
         run2();}
-        if (w1 <= 5) {
+       else if (w1 <= 5) {
         stop1();
         run4();
     }
 for(let e of brick){
     if (e.isCollision1(ball)){
         if(e.state){num+=100;count++; stop1();
-            run4();}
+           if(w1-ball.radius>e.y && w1+ball.radius<e.y+e.height){run2()}else run4();}
         e.setState();
 
     }
@@ -71,7 +71,7 @@ function draw2() {
     if (w1 <= 5) {
         stop2();
         run3();
-    }
+    }else
     if (q1 >= 495) {
         stop2();
         run1();
@@ -79,7 +79,7 @@ function draw2() {
     for(let e of brick){
         if (e.isCollision1(ball)){
             if(e.state){count++;num+=100; stop2();
-                run3();}
+                if(w1-ball.radius>e.y && w1+ball.radius<e.y+e.height){run1()}else run3();}
             e.setState();
 
         }
@@ -97,21 +97,18 @@ function draw3() {
     if (q1 >= 495) {
         stop3();
         run4();
+    }else if (isCollision(ball,bar)) {
+        stop3();
+        run2();
+        vx=Math.random()*7
     }
     for(let e of brick){
         if (e.isCollision1(ball)){
             if(e.state){ count++;num+=100; stop3();
-                run2();}
+                if(w1-ball.radius>e.y && w1+ball.radius<e.y+e.height){run4()}else  run2();}
             e.setState();
 
         }
-    }
-    if (isCollision(ball,bar)) {
-        stop3();
-        run2();
-        vx=Math.random()*7
-
-
     }
     //cham bien duoi
     if (w1 >= 555) {
@@ -131,19 +128,19 @@ function draw4() {
     if (q1 <= 5) {
         stop4();
         run3();
-    }
-    for(let e of brick){
-        if (e.isCollision1(ball)){
-            if(e.state){count++;num+=100; stop4();
-                run1();}
-            e.setState();
-
-        }
-    }
-    if (isCollision(ball,bar)) {
+    }else if (isCollision(ball,bar)) {
         stop4();
         run1();
         vx=Math.random()*7
+    }
+
+    for(let e of brick){
+        if (e.isCollision1(ball)){
+            if(e.state){count++;num+=100; stop4();
+                if(w1-ball.radius>e.y && w1+ball.radius<e.y+e.height){run3()}else run1();}
+            e.setState();
+
+        }
     }
     // cham bien duoi
     if (w1 >= 555) {
@@ -159,16 +156,16 @@ function draw4() {
 }
 
 function run1() {
-    interval1 = setInterval(draw1, 50)
+    interval1 = setInterval(draw1, 25)
 }
 function run2() {
-    interval2 = setInterval(draw2, 50)
+    interval2 = setInterval(draw2, 25)
 }
 function run3() {
-    interval3 = setInterval(draw3, 50)
+    interval3 = setInterval(draw3, 25)
 }
 function run4() {
-    interval4 = setInterval(draw4, 50)
+    interval4 = setInterval(draw4, 25)
 }
 
 function stop1() {
